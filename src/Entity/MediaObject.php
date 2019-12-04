@@ -47,7 +47,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *     },
  *     itemOperations={
  *         "get"
- *     }
+ *     },shortName="Files"
  * )
  * @Vich\Uploadable
  */
