@@ -27,7 +27,6 @@ class Question
 
     /**
      * @ORM\OneToOne(targetEntity="Answer", inversedBy="question")
-     * @ORM\JoinColumn(referencedColumnName="id", unique=true)
      * @ApiSubresource
      */
     public $answer;
@@ -52,12 +51,12 @@ class Question
         $this->content = $content;
     }
 
-    public function getAnswer(): ?Answer
+    public function getAnswer(): ?string
     {
         return $this->answer;
     }
 
-    public function setAnswer(Answer $answer): void
+    public function setAnswer(string $answer): void
     {
         $this->answer = $answer;
     }

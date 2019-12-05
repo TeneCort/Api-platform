@@ -28,7 +28,6 @@ class Answer
 
     /**
      * @ORM\OneToOne(targetEntity="Question", mappedBy="answer")
-     * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
      */
     public $question;
 
@@ -52,12 +51,12 @@ class Answer
         $this->content = $content;
     }
 
-    public function getQuestion(): ?Question
+    public function getQuestion(): ?string
     {
         return $this->question;
     }
 
-    public function setQuestion(Question $question): void
+    public function setQuestion(string $question): void
     {
         $this->question = $question;
     }
