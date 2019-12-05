@@ -27,7 +27,6 @@ class Question
 
     /**
      * @ORM\OneToOne(targetEntity="Answer", inversedBy="question")
-     * @ORM\JoinColumn(referencedColumnName="id", unique=true)
      * @ApiSubresource
      */
     public $answer;

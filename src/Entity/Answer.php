@@ -28,7 +28,6 @@ class Answer
 
     /**
      * @ORM\OneToOne(targetEntity="Question", mappedBy="answer")
-     * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
      */
     public $question;
 
