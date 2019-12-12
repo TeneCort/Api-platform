@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20191202082153 extends AbstractMigration
+final class Version20191212225546 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,7 +22,10 @@ final class Version20191202082153 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE cheese_listing (id INT AUTO_INCREMENT NOT NULL, title VARCHAR(255) NOT NULL, description LONGTEXT NOT NULL, price INT NOT NULL, created_at DATETIME NOT NULL, is_published TINYINT(1) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE project ADD logo VARCHAR(255) NOT NULL');
+        $this->addSql('ALTER TABLE works ADD project_id INT DEFAULT NULL, ADD logo VARCHAR(255) NOT NULL, ADD download_link VARCHAR(255) NOT NULL');
+        $this->addSql('ALTER TABLE works ADD CONSTRAINT FK_F6E50243166D1F9C FOREIGN KEY (project_id) REFERENCES project (id)');
+        $this->addSql('CREATE INDEX IDX_F6E50243166D1F9C ON works (project_id)');
     }
 
     public function down(Schema $schema) : void
@@ -30,6 +33,9 @@ final class Version20191202082153 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP TABLE cheese_listing');
+        $this->addSql('ALTER TABLE project DROP logo');
+        $this->addSql('ALTER TABLE works DROP FOREIGN KEY FK_F6E50243166D1F9C');
+        $this->addSql('DROP INDEX IDX_F6E50243166D1F9C ON works');
+        $this->addSql('ALTER TABLE works DROP project_id, DROP logo, DROP download_link');
     }
 }
